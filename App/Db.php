@@ -34,11 +34,8 @@ class Db
         $sth = $this->dbh->prepare($query);
         $res = $sth->execute($params);
 
-        if(false === $res){
-           return false;
-        }else{
-            return true;
-        }
+        return (false === $res)? false : true ;
+
     }
 
 }

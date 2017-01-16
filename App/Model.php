@@ -24,27 +24,13 @@ abstract class Model
     public static function findById($id)
     {
         $db = new Db();
-        $sql = 'SELECT * FROM ' . static::$table. ' WHERE id = :id';
+        $sql = 'SELECT * FROM ' . static::$table . ' WHERE id = :id';
 
-        $res = $db->query($sql, [':id' => $id], static::class);
+        $res = $db->query($sql, [':id' => $id], static::class)[0];
 
-        if(!empty($res)){
-
-            return $res;
-
-        }else{
-            return var_dump(false);
-        }
+        return (!empty($res))? $res : false ;
 
     }
-
-    public static function lastNews()
-    {
-        $db = new Db();
-        $sql = 'SELECT * FROM ' . static::$table .' ORDER BY id DESC LIMIT  3 ';
-        return $db->query($sql, [], static::class);
-    }
-
 
 
 }

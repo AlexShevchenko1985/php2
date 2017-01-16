@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Db;
 use App\Model;
 
 class Article
@@ -12,5 +13,12 @@ class Article
 
     public $title;
     public $text;
+
+    public static function getLatest($limit = 3)
+    {
+        $db = new Db();
+        $sql = 'SELECT * FROM ' . static::$table . ' ORDER BY id DESC LIMIT '.$limit;
+        return $db->query($sql, [], static::class);
+    }
 
 }
