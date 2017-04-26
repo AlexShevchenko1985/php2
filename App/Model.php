@@ -1,36 +1,36 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Alex
+ * Date: 24.04.2017
+ * Time: 21:38
+ */
 
 namespace App;
+
 
 abstract class Model
 {
 
-    public $id;
-
     public static function findAll()
     {
         $db = new Db();
-        $sql = 'SELECT * FROM ' . static::$table;
+        $sql = 'SELECT * FROM '.static::$table;
         return $db->query($sql, [], static::class);
     }
 
     public static function countAll()
     {
         $db = new Db();
-        $sql = 'SELECT COUNT(*) AS num FROM ' . static::$table;
+        $sql = 'SELECT count(*) AS num FROM '.static::$table;
         return (int)$db->query($sql, [], static::class)[0]->num;
     }
 
     public static function findById($id)
     {
         $db = new Db();
-        $sql = 'SELECT * FROM ' . static::$table . ' WHERE id = :id';
-
-        $res = $db->query($sql, [':id' => $id], static::class)[0];
-
-        return (!empty($res))? $res : false ;
-
+        $sql = 'SELECT * FROM '.static::$table.' WHERE id = :id';
+        return  $db->query($sql, ['id' => $id], static::class)[0];
     }
-
 
 }

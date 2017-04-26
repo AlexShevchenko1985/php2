@@ -1,41 +1,45 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Alex
+ * Date: 24.04.2017
+ * Time: 20:59
+ */
 
 namespace App;
 
 class Db
 {
-
     protected $dbh;
 
     public function __construct()
     {
-        $dsn = 'mysql:host=localhost;dbname=php2';
-        $user = 'root';
-        $password = '';
-        $this->dbh = new \PDO($dsn, $user, $password);
+        $dns = 'mysql:host=localhost;dbname=php2';
+        $user ='root';
+        $pass = '';
+        $this->dbh = new \PDO($dns, $user, $pass);
     }
 
-    public function query($sql, $data = [], $class = null)
+    public function query($sql, $date = [], $class = '')
     {
         $sth = $this->dbh->prepare($sql);
-        $res = $sth->execute($data);
-        if (false === $res) {
-            die('DB error in ' . $sql);
+        $res = $sth->execute($date);
+        if(false === $res){
+            die('Error in '.$sql);
         }
-        if (null === $class) {
+
+        if(null == $class){
             return $sth->fetchAll();
-        } else {
+        }else{
             return $sth->fetchAll(\PDO::FETCH_CLASS, $class);
         }
+
     }
 
-    public function execute($query, $params=[])
-    {
+    public function execute($query, $params=[]){
         $sth = $this->dbh->prepare($query);
-        $res = $sth->execute($params);
-
-        return (false === $res)? false : true ;
+        return $sth->execute($params);
 
     }
 
-}
+   }
