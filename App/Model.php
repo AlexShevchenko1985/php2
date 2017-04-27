@@ -33,4 +33,10 @@ abstract class Model
         return  $db->query($sql, ['id' => $id], static::class)[0];
     }
 
+    public static function getLastItem($limit = 1){
+        $db = new Db();
+        $sql = 'SELECT * FROM '.static::$table.' ORDER BY id DESC LIMIT '.$limit;
+        return $db->query($sql, [], static::class);
+    }
+
 }

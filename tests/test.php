@@ -17,5 +17,5 @@ $sql_update = 'UPDATE news
                WHERE id = :id';
 $params2 = [':id' => $id, ':title1' => $title1, ':text1' => $text1];
 
-//$data = $db->execute($sql_insert, $params);
+//$data = $db->execute($sql_update, $params2);
 //echo $data;
