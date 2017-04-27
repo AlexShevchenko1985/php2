@@ -1,5 +1,5 @@
 <?php
-require __DIR__.'/../autoload.php';
+require __DIR__ . '/../autoload.php';
 $db = new \App\Db();
 //INSERT INTO
 $title = 'Title TEST2';
@@ -16,6 +16,7 @@ $sql_update = 'UPDATE news
                SET title = :title1, text = :text1
                WHERE id = :id';
 $params2 = [':id' => $id, ':title1' => $title1, ':text1' => $text1];
-
-//$data = $db->execute($sql_update, $params2);
+$data = $db->execute($sql_update, $params2);
 //echo $data;
+//assert(is_object($data));
+//assert($data instanceof \App\Db);
