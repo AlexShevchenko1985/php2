@@ -30,7 +30,8 @@ abstract class Model
     {
         $db = new Db();
         $sql = 'SELECT * FROM '.static::$table.' WHERE id = :id';
-        return  $db->query($sql, ['id' => $id], static::class)[0];
+        $query = $db->query($sql, ['id' => $id], static::class);
+        return  ($query) ? $query[0] : false;
     }
 
     public static function getLastItem($limit = 1){
