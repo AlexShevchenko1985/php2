@@ -2,7 +2,7 @@
 
 namespace App;
 
-class Config
+abstract class Config
 {
     protected static $instance;
 
