@@ -9,10 +9,11 @@
 </head>
 <body>
 <h1>News</h1>
-<?php foreach ($news as $values) { ?>
+<?php foreach ($news as $article) { ?>
     <div>
-        <a href="http://php2/article.php?id=<?php echo $values->id; ?>"><h3><?php echo $values->title; ?></h3></a>
-        <p><?php echo $values->text; ?></p>
+        <a href="http://php2/article.php?id=<?php echo $article->id; ?>"><h3><?php echo $article->title; ?></h3></a>
+        <p><?php echo $article->text; ?></p>
+        <p>Author: <?php echo $article->author->firstname.' '.$article->author->lastname ?></p>
     </div>
 <?php } ?>
 </body>

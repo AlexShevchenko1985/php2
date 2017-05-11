@@ -10,12 +10,13 @@
 <body>
 <h1>All Posts</h1>
 <a href="http://php2/post.php" >Add New</a>
-<?php foreach ($news as $values) { ?>
+<?php foreach ($news as $article) { ?>
     <div>
-        <a href="http://php2/article.php?id=<?php echo $values->id; ?>"><h3><?php echo $values->title; ?></h3></a>
-        <p><?php echo $values->text; ?></p>
-        <a href="http://php2/post.php?id=<?php echo $values->id; ?>">Update</a>
-        <a href="http://php2/admin.php?delete=<?php echo $values->id; ?>">Trash</a>
+        <a href="http://php2/article.php?id=<?php echo $article->id; ?>"><h3><?php echo $article->title; ?></h3></a>
+        <p><?php echo $article->text; ?></p>
+        <p>Author: <?php echo $article->author->firstname.' '.$article->author->lastname ?></p>
+        <a href="http://php2/post.php?id=<?php echo $article->id; ?>">Update</a>
+        <a href="http://php2/admin.php?delete=<?php echo $article->id; ?>">Trash</a>
     </div>
 <?php } ?>
 </body>

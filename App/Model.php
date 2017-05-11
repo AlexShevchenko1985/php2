@@ -9,9 +9,19 @@
 namespace App;
 
 
+use App\Models\Article;
+use App\Models\Authors;
+
 abstract class Model
 {
+    /**
+     * @var array
+     */
+    public $data = [];
 
+    /**
+     * return mixed
+     */
     public static function findAll()
     {
         $db = Db::instance();
@@ -19,6 +29,9 @@ abstract class Model
         return $db->query($sql, [], static::class);
     }
 
+    /**
+     * return int
+     */
     public static function countAll()
     {
         $db = Db::instance();
@@ -26,14 +39,24 @@ abstract class Model
         return (int)$db->query($sql, [], static::class)[0]->num;
     }
 
+    /**
+     * @param int $id
+     * return mixed
+     */
     public static function findById($id)
     {
         $db = Db::instance();
         $sql = 'SELECT * FROM ' . static::$table . ' WHERE id = :id';
         $query = $db->query($sql, ['id' => $id], static::class);
-        return ($query) ? $query[0] : false;
+        if (false !== $query) {
+            return $query[0];
+        }
     }
 
+    /**
+     * @param int $limit
+     * @return mixed
+     */
     public static function getLastItem($limit = 1)
     {
         $db = Db::instance();
@@ -41,11 +64,17 @@ abstract class Model
         return $db->query($sql, [], static::class);
     }
 
+    /**
+     * @return mixed
+     */
     public function isNew()
     {
         return null === $this->id;
     }
 
+    /**
+     * @return bool
+     */
     public function update()
     {
 
@@ -73,6 +102,9 @@ abstract class Model
 
     }
 
+    /**
+     * @return bool
+     */
     public function insert()
     {
 
@@ -93,7 +125,6 @@ abstract class Model
             $sets[] = ':' . $key;
         }
 
-
         $db = Db::instance();
         $sql = 'INSERT INTO ' . static::$table . ' (' . implode(',', $column) . ') 
                        VALUE (' . implode(',', $sets) . ')';
@@ -101,6 +132,9 @@ abstract class Model
 
     }
 
+    /**
+     * @return bool
+     */
     public function save()
     {
         if ($this->isNew()) {
@@ -110,6 +144,9 @@ abstract class Model
         }
     }
 
+    /**
+     * @return bool
+     */
     public function delete()
     {
         if ($this->isNew()) {
@@ -120,6 +157,20 @@ abstract class Model
         $sql = 'DELETE FROM ' . static::$table .
             ' WHERE id = :id';
         return $db->execute($sql, [':id' => $this->id]);
+    }
+
+    /**
+     * @param $name
+     * @return mixed
+     */
+    public function __get($name)
+    {
+        if ($name == 'author') {
+            if (isset($this->author_id)) {
+                $this->data[$name] = Authors::findById($this->author_id);
+            }
+        }
+        return $this->data[$name];
     }
 
 }

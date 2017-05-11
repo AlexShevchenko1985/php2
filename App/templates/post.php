@@ -10,6 +10,7 @@
 <body>
 <a href="http://php2/admin.php" >Back</a>
 <h1><?php echo ($_GET['id']? 'Edit post' : 'Add New Post') ?></h1>
+<p>Author: <?php echo $article->author->firstname.' '.$article->author->lastname ?></p>
 <form method="POST">
     <h4>Title</h4>
     <input name="title" style="width: 340px" value="<?php echo $article->title; ?>">

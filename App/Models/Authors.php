@@ -10,6 +10,9 @@ class Authors extends Model
     public $firstname;
     public $lastname;
 
+    /**
+     * @var string Table name
+     */
     public static $table = 'authors';
 
 }

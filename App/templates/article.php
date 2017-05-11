@@ -11,5 +11,6 @@
 <h1>Article</h1>
 <h2><?php echo $article->title; ?></h2>
 <p><?php echo $article->text ?></p>
+<p>Author: <?php echo $article->author->firstname.' '.$article->author->lastname ?></p>
 </body>
 </html>

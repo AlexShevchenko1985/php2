@@ -2,9 +2,6 @@
 require __DIR__ . '/autoload.php';
 
 //## last 3 news ##
-$news = \App\Models\Article::getLastItem(3);
-include __DIR__ .'/App/templates/index.php';
-
-
-
-
+$view = new \App\View();
+$view->news =  \App\Models\Article::getLastItem(3);
+$view->renderer(__DIR__ .'/App/templates/index.php');
