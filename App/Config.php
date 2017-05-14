@@ -2,12 +2,14 @@
 
 namespace App;
 
-abstract class Config
+class Config
 {
     protected static $instance;
+    public $data;
 
     protected function __construct()
     {
+        $this->data = include __DIR__.'/../ini.php';
 
     }
 
@@ -15,7 +17,7 @@ abstract class Config
     {
 
         if (null === static::$instance) {
-            static::$instance = new static;
+            static::$instance = new static();
         }
         return static::$instance;
     }

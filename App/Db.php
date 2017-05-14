@@ -3,14 +3,15 @@
 namespace App;
 
 class Db
-    extends Config
+extends Config
 {
     protected $dbh;
 
     protected function __construct()
     {
-        $config = include __DIR__ . '/../ini.php';
-        $this->dbh = new \PDO($config['dns'], $config['user'], $config['pass']);
+        $config = Config::instance();
+        $this->dbh = new \PDO($config->data['db']['dns'], $config->data['db']['user'], $config->data['db']['pass']);
+
     }
 
     public function query($sql, $date = [], $class = '')
