@@ -25,6 +25,6 @@ trait ViewTrait
 
     public function __isset($name)
     {
-        return $this->data[$name];
+        return isset($this->data[$name]);
     }
 }

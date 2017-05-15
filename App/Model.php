@@ -17,7 +17,7 @@ abstract class Model
     /**
      * @var array
      */
-    public $data = [];
+   // public $data = [];
 
     /**
      * return mixed
@@ -163,14 +163,14 @@ abstract class Model
      * @param $name
      * @return mixed
      */
-    public function __get($name)
-    {
-        if ($name == 'author') {
-            if (isset($this->author_id)) {
-                $this->data[$name] = Authors::findById($this->author_id);
-            }
-        }
-        return $this->data[$name];
-    }
+//    public function __get($name)
+//    {
+//        if ($name == 'author') {
+//            if (isset($this->author_id)) {
+//                $this->data[$name] = Authors::findById($this->author_id);
+//            }
+//        }
+//        return $this->data[$name];
+//    }
 
 }
