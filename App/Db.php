@@ -3,13 +3,14 @@
 namespace App;
 
 class Db
-extends Config
 {
+    use SingletonTrait;
+
     protected $dbh;
 
     protected function __construct()
     {
-        $config = Config::instance();
+        $config = Config::instance(__DIR__.'/../ini.php');
         $this->dbh = new \PDO($config->data['db']['dns'], $config->data['db']['user'], $config->data['db']['pass']);
 
     }

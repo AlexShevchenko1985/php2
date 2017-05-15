@@ -4,20 +4,19 @@ namespace App;
 
 class Config
 {
-    protected static $instance;
-    public $data;
+  use SingletonTrait;
 
-    protected function __construct()
+    protected function __construct($args)
     {
-        $this->data = include __DIR__.'/../ini.php';
+        $this->data = include $args;
 
     }
 
-    public static function instance()
+    public static function instance($args)
     {
 
         if (null === static::$instance) {
-            static::$instance = new static();
+            static::$instance = new static($args);
         }
         return static::$instance;
     }
