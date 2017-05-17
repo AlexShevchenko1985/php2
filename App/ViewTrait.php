@@ -11,7 +11,7 @@ namespace App;
 
 trait ViewTrait
 {
-    public $data = [];
+    protected $data = [];
 
     public function __set($name, $value)
     {

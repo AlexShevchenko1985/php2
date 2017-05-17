@@ -9,15 +9,13 @@
 namespace App;
 
 
-use App\Models\Article;
+
 use App\Models\Authors;
 
 abstract class Model
 {
-    /**
-     * @var array
-     */
-   // public $data = [];
+
+    use ViewTrait;
 
     /**
      * return mixed
@@ -69,7 +67,7 @@ abstract class Model
      */
     public function isNew()
     {
-        return null === $this->id;
+        return null === $this->data['id'];
     }
 
     /**
@@ -85,7 +83,8 @@ abstract class Model
         $sets = [];
         $data = [];
 
-        foreach ($this as $key => $value) {
+
+        foreach ($this->data as $key => $value) {
             $data[':' . $key] = $value;
             if ('id' == $key) {
                 continue;
@@ -116,7 +115,7 @@ abstract class Model
         $sets = [];
         $data = [];
 
-        foreach ($this as $key => $value) {
+        foreach ($this->data as $key => $value) {
             if ('id' == $key) {
                 continue;
             }
@@ -156,21 +155,21 @@ abstract class Model
         $db = Db::instance();
         $sql = 'DELETE FROM ' . static::$table .
             ' WHERE id = :id';
-        return $db->execute($sql, [':id' => $this->id]);
+        return $db->execute($sql, [':id' => $this->data['id']]);
     }
 
     /**
      * @param $name
      * @return mixed
      */
-//    public function __get($name)
-//    {
-//        if ($name == 'author') {
-//            if (isset($this->author_id)) {
-//                $this->data[$name] = Authors::findById($this->author_id);
-//            }
-//        }
-//        return $this->data[$name];
-//    }
+    public function __get($name)
+    {
+        if ($name == 'author') {
+            if (isset($this->author_id)) {
+                $this->data[$name] = Authors::findById($this->author_id);
+            }
+        }
+        return $this->data[$name];
+    }
 
 }
