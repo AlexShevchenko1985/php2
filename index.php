@@ -27,31 +27,6 @@ $thumb = bd_get_attachment_thumbnail_url(get_post_thumbnail_id($id), 'promo-size
         </div>
     </section>
 
-<?php if (have_posts()):  ?>
-    <div class="panel">
-        <div class="container">
-            <div class="container-inner">
-
-                <?php
-                /*
-                 * include search
-                 */
-                get_search_form(); ?>
-
-                <?php
-                /*
-                 *  category
-                 */
-                get_template_part('template-parts/posts/category'); ?>
-
-            </div>
-        </div>
-    </div>
-
-
-   
-<?php endif; ?>
-
 </main>
 
 
