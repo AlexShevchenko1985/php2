@@ -49,26 +49,7 @@ $thumb = bd_get_attachment_thumbnail_url(get_post_thumbnail_id($id), 'promo-size
     </div>
 
 
-    <section class="blog">
-        <div class="container">
-            <div class="container-inner">
-                <ul class="blog-list">
-                    <?php
-                    while (have_posts()):
-                        the_post();
-                        get_template_part('template-parts/posts/content-post');
-                    endwhile;
-                    ?>
-                </ul>
-
-                <?php
-                if (function_exists('bd_posts_nav')) {
-                    bd_posts_nav();
-                } ?>
-
-            </div>
-        </div>
-    </section>
+   
 <?php endif; ?>
 
 </main>
